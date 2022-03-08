@@ -1,0 +1,49 @@
+plugins {
+    id("com.github.johnrengelman.shadow") version "7.1.1"
+    id("io.micronaut.application") version "3.2.2"
+}
+
+version = "0.1"
+group = "com.wenance.camunda"
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    annotationProcessor("org.projectlombok:lombok")
+    annotationProcessor("io.micronaut:micronaut-http-validation")
+
+    implementation("info.novatec:micronaut-zeebe-client-feature:1.3.1")
+    implementation("io.micronaut:micronaut-http-client")
+    implementation("io.micronaut:micronaut-jackson-databind")
+    implementation("io.micronaut:micronaut-runtime")
+    implementation("jakarta.annotation:jakarta.annotation-api")
+    implementation("io.micronaut:micronaut-validation")
+
+    runtimeOnly("ch.qos.logback:logback-classic")
+
+    compileOnly("org.projectlombok:lombok")
+
+}
+
+
+application {
+    mainClass.set("com.wenance.camunda.Application")
+}
+java {
+    sourceCompatibility = JavaVersion.toVersion("11")
+    targetCompatibility = JavaVersion.toVersion("11")
+}
+
+graalvmNative.toolchainDetection = false
+micronaut {
+    runtime("netty")
+    testRuntime("junit5")
+    processing {
+        incremental(true)
+        annotations("com.wenance.camunda.*")
+    }
+}
+
+

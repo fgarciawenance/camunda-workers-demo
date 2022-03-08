@@ -1,0 +1,18 @@
+micronaut:
+  application:
+    name: camundaWorkersDemo
+netty:
+  default:
+    allocator:
+      max-order: 3
+
+
+zeebe:
+  client:
+    cloud:
+      clusterId: ${ZEEBE_CLUSTER_ID}
+      clientId: ${ZEEBE_CLIENT_ID}
+      clientSecret: ${ZEEBE_CLIENT_SECRET}
+
+
+
